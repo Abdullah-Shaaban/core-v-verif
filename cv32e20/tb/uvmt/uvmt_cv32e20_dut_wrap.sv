@@ -115,6 +115,9 @@ module uvmt_cv32e20_dut_wrap #(
 
     assign irq = irq_uvma | irq_vp;
 
+    // Instantiate eXtension interface for compilation to succeed
+    cve2_if_xif xif();
+
     // ------------------------------------------------------------------------
     // Instantiate the core
 //    cve2_top #( 
@@ -123,6 +126,7 @@ module uvmt_cv32e20_dut_wrap #(
                .MHPMCounterWidth (MHPMCounterWidth),
                .RV32E            (RV32E),
                .RV32M            (RV32M),
+               .XIF              (1), // Enable eXtension interface
                .BranchPredictor  (BranchPredictor),
                .DmHaltAddr       (DmHaltAddr),
                .DmExceptionAddr  (DmExceptionAddr)
@@ -167,6 +171,12 @@ module uvmt_cv32e20_dut_wrap #(
   // Debug Interface
          .debug_req_i             (debug_req_uvma),
          .crash_dump_o            (),
+
+  // eXtension interface
+         .xif_issue_if     (xif),
+         .xif_register_if  (xif),
+         .xif_commit_if    (xif),
+         .xif_result_if    (xif),
 
   // RISC-V Formal Interface
   // Does not comply with the coding standards of _i/_o suffixes, but follows
