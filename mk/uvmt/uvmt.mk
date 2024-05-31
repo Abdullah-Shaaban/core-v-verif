@@ -168,6 +168,8 @@ RTLSRC_VOPT_TB_TOP	:= $(addsuffix _vopt, $(RTLSRC_VLOG_TB_TOP))
 # DESIGN_RTL_DIR is used by CV32E40P_MANIFEST file
 CV_CORE_PKG          := $(CORE_V_VERIF)/core-v-cores/$(CV_CORE_LC)
 CV_CORE_MANIFEST     := $(CV_CORE_PKG)/$(CV_CORE_LC)_manifest.flist
+# CV_CORE_MANIFEST     := $(CV_CORE_PKG)/$(CV_CORE_LC)_manifest.flist
+CV_CORE_MANIFEST     ?= /pri/abal/V_Unit/cv32e20v/cv32e20v_manifest.flist
 export DESIGN_RTL_DIR = $(CV_CORE_PKG)/rtl
 
 RTLSRC_HOME   := $(CV_CORE_PKG)/rtl

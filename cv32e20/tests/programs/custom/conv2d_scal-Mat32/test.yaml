@@ -1,0 +1,4 @@
+name: conv2d_scal-Mat32
+uvm_test: uvmt_cv32e20_firmware_test_c
+description: >
+    This test performs a 2D convolution on a 3x3 kernel and a 32x32 image.

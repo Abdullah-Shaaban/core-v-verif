@@ -1,0 +1,4 @@
+name: axpy
+uvm_test: uvmt_cv32e20_firmware_test_c
+description: >
+    This test performs basic axpy benchmark.

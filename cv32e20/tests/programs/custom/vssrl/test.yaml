@@ -1,0 +1,4 @@
+name: vssrl
+uvm_test: uvmt_cv32e20_firmware_test_c
+description: >
+    Test the fixed point Single-Width Scaling Logical Shift vector instructions.

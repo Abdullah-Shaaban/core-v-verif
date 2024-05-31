@@ -1,0 +1,89 @@
+.section .data,"aw",@progbits
+.global M
+.align 4
+M:
+    .word 0x00000008
+.global N
+.align 4
+N:
+    .word 0x00000008
+.global F
+.align 4
+F:
+    .word 0x00000003
+.global image
+.align 4
+image:
+    .word 0x09020709
+    .word 0x03020605
+    .word 0x03060402
+    .word 0x06030904
+    .word 0x01060706
+    .word 0x05080907
+    .word 0x06010204
+    .word 0x07030501
+    .word 0x08000702
+    .word 0x05020804
+    .word 0x01090706
+    .word 0x04090706
+    .word 0x01060301
+    .word 0x08000005
+    .word 0x00020800
+    .word 0x08090402
+    .word 0x05000603
+    .word 0x03090204
+    .word 0x09000105
+    .word 0x05020503
+    .word 0x08080400
+    .word 0x09060008
+    .word 0x02080604
+    .word 0x07020503
+    .word 0x01070309
+.global filter
+.align 4
+filter:
+    .word 0x04020100
+    .word 0x01030300
+    .word 0x00000004
+.global output
+.align 4
+output:
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+    .word 0x00000000
+.global golden_o
+.align 4
+golden_o:
+    .word 0x6259726d
+    .word 0x503e543a
+    .word 0x5e487c57
+    .word 0x5d366a3d
+    .word 0x61496568
+    .word 0x5341734d
+    .word 0x494c3765
+    .word 0x3f43744b
+    .word 0x5f50446e
+    .word 0x42216f28
+    .word 0x693d3f60
+    .word 0x412e6929
+    .word 0x4e625c6d
+    .word 0x624a673f
+    .word 0x5f4f4c4b
+    .word 0x56675272
+.global o_checksum
+.align 4
+o_checksum:
+    .word 0x000000d8

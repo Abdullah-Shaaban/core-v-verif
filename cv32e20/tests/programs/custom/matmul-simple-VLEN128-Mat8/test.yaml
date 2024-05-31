@@ -1,0 +1,4 @@
+name: matmul-simple-VLEN128-Mat8
+uvm_test: uvmt_cv32e20_firmware_test_c
+description: >
+    This test performs matrix multiplication benchmarking.

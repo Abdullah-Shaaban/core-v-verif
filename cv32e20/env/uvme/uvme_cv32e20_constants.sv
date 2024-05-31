@@ -19,7 +19,7 @@
 `define __UVME_CV32E20_CONSTANTS_SV__
 
 
-parameter uvme_cv32e20_sys_default_clk_period   =  5_000; // 10ns (it's actually a half period)
+parameter uvme_cv32e20_sys_default_clk_period   =  1_250; // 2.5ns (it's actually a half period)
 parameter uvme_cv32e20_debug_default_clk_period = 10_000; // 20ns
 
 

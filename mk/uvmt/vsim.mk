@@ -26,8 +26,10 @@ VLIB   					= vlib
 VMAP 					= vmap
 VLOG 					= $(CV_SIM_PREFIX) vlog
 VOPT 					= $(CV_SIM_PREFIX) vopt
+VOPT 					= $(CV_SIM_PREFIX) vopt
 VSIM 					= $(CV_SIM_PREFIX) vsim
-VISUALIZER				= $(CV_TOOL_PREFIX) visualizer
+# VSIM 					= qrsh -cwd -V vsim
+VISUALIZER				= $(CV_SIM_PREFIX) visualizer
 VCOVER                  = vcover
 
 # Paths
@@ -127,7 +129,7 @@ VLOG_FLAGS += $(DPILIB_VLOG_OPT)
 # Add the ISS to compilation
 VLOG_FLAGS += "+define+$(CV_CORE_UC)_TRACE_EXECUTION"
 VLOG_FLAGS += "+define+UVM"
-VLOG_FLAGS += "+define+RVFI"
+# VLOG_FLAGS += "+define+RVFI"
 ifeq ($(call IS_YES,$(USE_ISS)),YES)
 VLOG_FLAGS += +define+USE_ISS
 VLOG_FLAGS += +define+USE_IMPERASDV
@@ -135,6 +137,13 @@ VLOG_FILE_LIST_IDV = -f $(DV_UVMT_PATH)/imperas_dv.flist
 ifeq ($(call IS_YES,$(COV)),YES)
 VLOG_FLAGS += +define+IMPERAS_COV
 endif
+endif
+
+# More user DEFINES
+USER_DEFINES ?=
+ifneq ($(strip $(USER_DEFINES)),)
+# If USER_DEFINES is not empty, append it to VLOG_FLAGS
+VLOG_FLAGS += $(USER_DEFINES)
 endif
 
 ###############################################################################
@@ -145,7 +154,7 @@ VOPT_FLAGS    ?= \
               -suppress 7034 \
               -suppress 2732 \
               -suppress 2247 \
-              +acc \
+              -debug,cell \
               $(QUIET)
 
 ###############################################################################

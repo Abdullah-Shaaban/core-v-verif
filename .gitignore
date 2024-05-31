@@ -32,6 +32,7 @@ xrun.log
 xcelium.d/
 waves.shm/
 *.log
+*.do
 stdout.txt
 .vscode
 cva6/tests/riscv-compliance/

@@ -1,0 +1,4 @@
+name: vredsum
+uvm_test: uvmt_cv32e20_firmware_test_c
+description: >
+    Test the reduction sum instruction.

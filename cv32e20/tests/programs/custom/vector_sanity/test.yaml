@@ -1,0 +1,4 @@
+name: vector_sanity
+uvm_test: uvmt_cv32e20_firmware_test_c
+description: >
+    Sanity test for the interface to the vector coprocessor.

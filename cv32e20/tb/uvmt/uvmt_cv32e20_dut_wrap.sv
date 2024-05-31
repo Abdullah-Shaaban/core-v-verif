@@ -34,7 +34,7 @@ module uvmt_cv32e20_dut_wrap #(
                             parameter int unsigned MHPMCounterNum    = 10,
                             parameter int unsigned MHPMCounterWidth  = 40,
                             parameter bit          RV32E             = 1'b0,
-                            parameter rv32m_e      RV32M             = RV32MFast,
+                            parameter rv32m_e      RV32M             = RV32MSingleCycle,//RV32MFast,
                             parameter bit          BranchPredictor   = 1'b0,
                             parameter int unsigned DmHaltAddr        = 32'h1A11_0800,
                             parameter int unsigned DmExceptionAddr   = 32'h1A14_0000,
@@ -101,27 +101,36 @@ module uvmt_cv32e20_dut_wrap #(
     assign interrupt_if.clk                     = clknrst_if.clk;
     assign interrupt_if.reset_n                 = clknrst_if.reset_n;
     assign irq_uvma                             = interrupt_if.irq;
-    assign interrupt_if.irq_id                  = cv32e20_top_i.u_cve2_top.u_cve2_core.id_stage_i.controller_i.exc_cause_o[4:0]; //irq_id;
-//    assign interrupt_if.irq_ack                 = cv32e20_top_i.u_cve2_top.u_cve2_core.id_stage_i.controller_i.handle_irq; //irq_ack;
-    assign interrupt_if.irq_ack                 = (cv32e20_top_i.u_cve2_top.u_cve2_core.id_stage_i.controller_i.ctrl_fsm_cs == 4'h7);//irq_ack
+    assign interrupt_if.irq_id                  = cv32e20_top_i.u_cve2v_top.u_cve2_top.u_cve2_core.id_stage_i.controller_i.exc_cause_o[4:0]; //irq_id;
+//    assign interrupt_if.irq_ack                 = cv32e20_top_i.u_cve2v_top.u_cve2_top.u_cve2_core.id_stage_i.controller_i.handle_irq; //irq_ack;
+`ifdef GLS
+    assign interrupt_if.irq_ack                 = '0;
+`else
+    assign interrupt_if.irq_ack                 = (cv32e20_top_i.u_cve2v_top.u_cve2_top.u_cve2_core.id_stage_i.controller_i.ctrl_fsm_cs == 4'h7);//irq_ack
+`endif
 
     assign vp_interrupt_if.clk                  = clknrst_if.clk;
     assign vp_interrupt_if.reset_n              = clknrst_if.reset_n;
     assign irq_vp                               = irq_uvma;
     // {irq_q[31:16], pending_enabled_irq_q[11], pending_enabled_irq_q[3], pending_enabled_irq_q[7]}
     // was vp_interrupt_if.irq;
-    assign vp_interrupt_if.irq_id               = cv32e20_top_i.u_cve2_top.u_cve2_core.id_stage_i.controller_i.exc_cause_o[4:0];    //irq_id;
-    assign vp_interrupt_if.irq_ack              = (cv32e20_top_i.u_cve2_top.u_cve2_core.id_stage_i.controller_i.ctrl_fsm_cs == 4'h7);//irq_ack
+    assign vp_interrupt_if.irq_id               = cv32e20_top_i.u_cve2v_top.u_cve2_top.u_cve2_core.id_stage_i.controller_i.exc_cause_o[4:0];    //irq_id;
+`ifdef GLS
+    assign vp_interrupt_if.irq_ack              = '0;
+`else
+    assign vp_interrupt_if.irq_ack              = (cv32e20_top_i.u_cve2v_top.u_cve2_top.u_cve2_core.id_stage_i.controller_i.ctrl_fsm_cs == 4'h7);//irq_ack
+`endif
 
     assign irq = irq_uvma | irq_vp;
 
     // Instantiate eXtension interface for compilation to succeed
-    cve2_if_xif xif();
+//     cve2_if_xif xif();
 
     // ------------------------------------------------------------------------
     // Instantiate the core
 //    cve2_top #( 
-    cve2_top_tracing #( 
+//     cve2_top_tracing #( 
+    cve2v_top_tracing #(
                .MHPMCounterNum   (MHPMCounterNum),
                .MHPMCounterWidth (MHPMCounterWidth),
                .RV32E            (RV32E),
@@ -173,10 +182,10 @@ module uvmt_cv32e20_dut_wrap #(
          .crash_dump_o            (),
 
   // eXtension interface
-         .xif_issue_if     (xif),
-         .xif_register_if  (xif),
-         .xif_commit_if    (xif),
-         .xif_result_if    (xif),
+       //   .xif_issue_if     (xif),
+       //   .xif_register_if  (xif),
+       //   .xif_commit_if    (xif),
+       //   .xif_result_if    (xif),
 
   // RISC-V Formal Interface
   // Does not comply with the coding standards of _i/_o suffixes, but follows

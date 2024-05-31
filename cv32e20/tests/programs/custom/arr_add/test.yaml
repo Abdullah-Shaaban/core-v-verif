@@ -1,4 +1,4 @@
 name: arr_add
 uvm_test: uvmt_cv32e20_firmware_test_c
 description: >
-    Runs integer array addition test
+    Runs integer array addition "benchmark" test.
